@@ -1,0 +1,94 @@
+
+var cors = require('cors')
+
+const express =require('express')
+
+const mysql= require('mysql2')
+const link = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'crud'
+})
+const  api =express()
+
+api.use(cors())
+
+api.get('/test' ,(req,res)=>{
+    res.send("work")
+})
+
+
+
+
+api.post('/addproduct' ,express.json() ,(req, res)=>{
+    const {name,price,description} =req.body
+    link.execute(`INSERT INTO products (name,price,description) VALUES ('${name}','${price}','${description}')`)
+
+    res.json({massage:"done"})
+
+})
+api.get('/allproduct' ,(req,res)=>{
+    link.execute(`SELECT * FROM products` ,(err,data)=>{
+        if(err){
+            res.json({massage:"error" ,err})
+        }else{
+            res.json({massage:"done",data})
+        }
+
+    })
+
+} )
+
+api.delete('/deleteproduct',express.json() ,(req,res)=>{
+    
+   
+    const {id} =req.body
+
+    link.execute(`DELETE FROM products WHERE id=${id}`  ,(error,data)=>{
+        if(error){
+            res.json({massage:"error" ,error})
+        }else{
+            res.json({massage:"done" ,data})
+        }
+    })
+
+})
+
+api.put('/updateproduct',express.json() ,(req,res)=>{
+
+    const {name,price ,id ,description} =req.body
+
+ link.execute(`UPDATE products set name='${name}' ,price='${price}', description='${description}'  WHERE id=${id} ` ,(error,data)=>{
+    if(error){
+        res.json({massage:'error' , error})
+    }else{
+        res.json({massage:"done" ,data })
+    }
+ })
+
+})
+
+api.get('/search' ,express.json() , (req , res) =>{
+
+const {id}= req.body
+
+
+
+    link.execute(`SELECT * FROM products WHERE id LIKE ${id}`, (error,  data)=>{
+       if(error){
+        res.json({massage:'error' , error})
+
+       }else{
+        res.json({massage:"done" ,data })
+    }
+    })
+
+})
+
+
+api.listen(3000,()=>{
+    console.log('server work ......')
+})
+
+ 

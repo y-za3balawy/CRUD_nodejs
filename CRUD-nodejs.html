@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap-5.3.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./CRUDE-nodejs.css">
+</head>
+<body class=" bg-secondary ">
+
+    <h1 class=" text-center " > CRUDE Operation with node.js</h1>
+    <div class=" container border border-white">
+        <label class="text-white" for="name">product name </label>
+        <input type="text" id="name"  class="form-control my-2">
+        <label class="text-white" for="price">product price </label>
+        <input type="number" id="price" class="form-control my-2">
+        <label class="text-white" for="description">product description </label>
+       <textarea name="description" id="description" cols="30" rows="10" class="form-control my-2"></textarea>
+       <button class="add btn btn-dark mt-2" onclick="creatobj()">Add</button>
+       <button class="updatebutton btn btn-danger mt-2   " onclick="updatedata()">update</button>
+
+
+    </div>
+
+    <div class="container">
+      <label class="text-white" for="search">search by id</label>
+        <input type="text" id="search" class="form-control my-2 search" placeholder="search ..."  onkeyup="search()">
+    </div>
+    <div class="  container mt-5"> 
+        <table class="table table-striped   table-hover table-active">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">price</th>
+                <th scope="col">description</th>
+                <th scope="col">Action</th>
+                <th scope="col">update</th>
+                <th scope="col">delete</th>
+              </tr>
+            </thead>
+            <tbody class="tbody ">
+             
+              
+            </tbody>
+          </table>
+
+    </div>
+
+
+    <script src="./bootstrap-5.3.0-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./CRUDE-nodejs.js"></script>
+</body>
+</html>
